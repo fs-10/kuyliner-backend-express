@@ -40,7 +40,7 @@ module.exports = {
 
       res.status(201).json({
         message: "Update role has successfull",
-        status_update: `Update: ${get_role.role_name} to ${new_role_name}`,
+        any_message: `Update: ${get_role.role_name} to ${new_role_name}`,
       });
     } catch (error) {
       console.log(`\nError : ${error}`);
@@ -59,7 +59,7 @@ module.exports = {
 
       res.status(201).json({
         message: "Delete role has successfull",
-        status_update: `Delete: ${delete_role.role_name}`,
+        any_message: `Delete: ${delete_role.role_name}`,
       });
 
     } catch (error) {
