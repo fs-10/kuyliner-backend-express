@@ -23,7 +23,7 @@ module.exports = {
       });
     } catch (error) {
       console.log(`\nError : ${error}`);
-      res.status(404).json({
+      res.status(400).json({
         message: "Failed to create role or role not found",
         error: error.message,
       });
