@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const review_schema = new mongoose.Schema({
+const reviews_schema = new mongoose.Schema({
   text_review: { type: String, required: true },
   stars: { type: Number, required: true },
   date_create: { type: Date, required: true, default: Date.now },
@@ -10,6 +10,6 @@ const review_schema = new mongoose.Schema({
   },
 });
 
-const Review = mongoose.model("Review", review_schema);
+const Reviews = mongoose.model("Reviews", reviews_schema);
 
-module.exports = Review;
+module.exports = Reviews;

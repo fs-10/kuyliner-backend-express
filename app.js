@@ -7,13 +7,17 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-db_connection.then(() => {
-  console.log(`\nConnection: connection to database Success`);
-})
-.catch(error => {
-  console.error(`\nConnection: connection to database Failed\nError: " ${error} "`);
-});
+db_connection
+  .then(() => {
+    console.log(`\nConnection: Success connect to database`);
+  })
+  .catch((error) => {
+    console.error(
+      `\nConnection: connection to database Failed\nError: " ${error} "`
+    );
+  });
 
+app.use(express.json());
 app.use(allRoutes);
 
 app.listen(PORT, () => {
