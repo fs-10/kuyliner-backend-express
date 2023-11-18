@@ -1,10 +1,74 @@
-const { Users, Suppliers } = require("../models");
+const { Users, Suppliers, Role_Bases } = require("../models");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 require("dotenv").config();
 
 module.exports = {
-  sign_in: (req, res) => {},
+  sign_in: async (req, res) => {
+    try {
+      const { email, password } = req.body;
+
+      const user = await Users.findOne({ email: email });
+      const supplier = await Suppliers.findOne({ email: email });
+
+      if (!user && !supplier) {
+        res.status(404).json({
+          message: `Email ${email} not found`,
+        });
+      } else {
+        if (user != null) {
+          if (!bcrypt.compareSync(password, user.password)) {
+            res.status(401).json({
+              message: "Wrong password",
+            });
+          } else {
+            const [role_user] = await Users.find({
+              role_id: user.role_id,
+            }).populate("role_id");
+
+            const user_token = jwt.sign(
+              { id: user._id, email: user.email, role: role_user.role_id.role_name},
+              process.env.KEY
+            );
+
+            const decode = jwt.decode(user_token);
+            console.log(decode);
+
+            res.status(200).json({
+              message: `Login success`,
+              token: user_token,
+            });
+          }
+        } else {
+          if (!bcrypt.compareSync(password, supplier.password)) {
+            res.status(401).json({
+              message: "Wrong password",
+            });
+          } else {
+            const supplier_token = jwt.sign(
+              { id: supplier._id, email: supplier.email },
+              process.env.KEY
+            );
+
+            const [role_supplier] = await Suppliers.find({
+              role_id: supplier.role_id,
+            }).populate("role_id");
+
+            res.status(200).json({
+              message: `Hallo ${email}, yang rolenya ${role_supplier.role_id.role_name}`,
+            });
+          }
+        }
+      }
+    } catch (error) {
+      console.log(`\nError : ${error}`);
+      res.status(500).json({
+        message: "Server error",
+        error: error.message,
+      });
+    }
+  },
   sign_up_user: async (req, res) => {
     try {
       const { username, email, password, first_name, role_id } = req.body;
@@ -53,8 +117,14 @@ module.exports = {
   },
   sign_up_supplier: async (req, res) => {
     try {
-      const { supplier_username, email, password, first_name, address, role_id } =
-        req.body;
+      const {
+        supplier_username,
+        email,
+        password,
+        first_name,
+        address,
+        role_id,
+      } = req.body;
 
       let {
         last_name,
@@ -90,7 +160,7 @@ module.exports = {
         role_id,
       });
 
-        // Usage sign up supplier on body
+      // Usage sign up supplier on body
       /* 
         {
           "supplier_username": "han_sup",
