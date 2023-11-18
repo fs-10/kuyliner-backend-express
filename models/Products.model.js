@@ -8,9 +8,9 @@ const products_schema = new mongoose.Schema({
     type: mongoose.ObjectId,
     ref: "Supplier",
   },
-  user_id: {
+  reviewer_id: {
     type: mongoose.ObjectId,
-    ref: "User",
+    ref: "Reviews",
   },
   category_id: {
     type: mongoose.ObjectId,
