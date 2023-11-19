@@ -2,8 +2,10 @@ const express = require("express");
 const router = express.Router();
 
 const auth = require("./auth.route");
-const role_base = require("./role.route");
-const review = require("./review.route");
+const role_base = require("./admin/role.route");
+const review = require("./user/review.route");
+const product = require("./supplier/product.route");
+const category = require("./admin/category.route");
 
 router.get("/", (req, res) => {
   res.status(200).json({
@@ -12,11 +14,16 @@ router.get("/", (req, res) => {
 });
 
 router.use("/auth", auth);
-router.use("/role", role_base);
 
 // User
 router.use("/review", review);
 
 // Supplier
+router.use("/product", product);
+// supplier promotion
+
+// Admin
+router.use("/superadmin", role_base);
+router.use("/superadmin", category);
 
 module.exports = router;
