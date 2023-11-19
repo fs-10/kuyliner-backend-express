@@ -4,9 +4,9 @@ const {
   update_review,
   delete_review,
   get_all_review,
-} = require("../controllers/review.controller");
+} = require("../../controllers/user_control/review.controller");
 
-const { token, has_role } = require("../middleware");
+const { token, has_role } = require("../../middleware");
 
 const router = express.Router();
 
