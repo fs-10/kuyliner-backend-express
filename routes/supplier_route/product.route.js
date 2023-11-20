@@ -4,7 +4,7 @@ const {
   update_product,
   delete_product,
   get_all_product,
-} = require("../../controllers/supplier_control/product.controller");
+} = require("../../controllers/supplier_controller/product.controller");
 
 const { token, has_role } = require("../../middleware");
 
