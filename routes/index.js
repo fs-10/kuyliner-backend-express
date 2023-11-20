@@ -2,10 +2,11 @@ const express = require("express");
 const router = express.Router();
 
 const auth = require("./auth.route");
-const role_base = require("./admin/role.route");
-const review = require("./user/review.route");
-const product = require("./supplier/product.route");
-const category = require("./admin/category.route");
+const role_base = require("./admin_route/role.route");
+const category = require("./admin_route/category.route");
+const review = require("./user_route/review.route");
+const product = require("./supplier_route/product.route");
+const promotion = require("./supplier_route/promotion.route");
 
 router.get("/", (req, res) => {
   res.status(200).json({
@@ -20,7 +21,7 @@ router.use("/review", review);
 
 // Supplier
 router.use("/product", product);
-// supplier promotion
+router.use("/promotion", promotion);
 
 // Admin
 router.use("/superadmin", role_base);
