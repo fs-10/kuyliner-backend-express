@@ -8,8 +8,6 @@ module.exports = {
       const token = authorization.split(" ")[1];
       const { id } = jwt.decode(token);
 
-      console.log(jwt.decode(token));
-
       const { name_product, price, product_image } = req.body;
 
       const create_execute = await Products.create({
