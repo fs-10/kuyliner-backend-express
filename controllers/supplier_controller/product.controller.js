@@ -14,7 +14,7 @@ module.exports = {
         name_product,
         price,
         product_image,
-        supplier_id : id,
+        supplier_id: id,
       });
 
       res.status(201).json({
@@ -31,13 +31,13 @@ module.exports = {
   },
   update_product: async (req, res) => {
     try {
-      const { review_id } = req.params;
-      const { text_review, stars } = req.body;
+      const { product_id } = req.params;
+      const { name_product, price, product_image } = req.body;
 
-      const update_execute = await Reviews.findByIdAndUpdate(review_id, {
-        text_review,
-        stars,
-        date_create: Date.now(),
+      const update_execute = await Products.findByIdAndUpdate(product_id, {
+        name_product,
+        price,
+        product_image,
       });
 
       res.status(201).json({
@@ -54,9 +54,9 @@ module.exports = {
   },
   delete_product: async (req, res) => {
     try {
-      const { review_id } = req.params;
+      const { product_id } = req.params;
 
-      const delete_execute = await Reviews.findByIdAndDelete(review_id);
+      const delete_execute = await Products.findByIdAndDelete(product_id);
 
       res.status(201).json({
         message: "Delete review successfull",
