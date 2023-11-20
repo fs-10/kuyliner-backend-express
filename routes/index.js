@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const auth = require("./auth.route");
+const user_login = require("./user_route/auth.user.route");
 const role_base = require("./admin_route/role.route");
 const category = require("./admin_route/category.route");
 const review = require("./user_route/review.route");
@@ -18,6 +19,7 @@ router.use("/auth", auth);
 
 // User
 router.use("/review", review);
+router.use("/user", user_login);
 
 // Supplier
 router.use("/product", product);
