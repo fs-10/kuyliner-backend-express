@@ -6,15 +6,17 @@ const products_schema = new mongoose.Schema({
   product_image: String,
   supplier_id: {
     type: mongoose.ObjectId,
-    ref: "Supplier",
+    ref: "Suppliers",
   },
-  reviewer_id: {
-    type: mongoose.ObjectId,
-    ref: "Reviews",
-  },
+  reviewer_id: [
+    {
+      type: mongoose.ObjectId,
+      ref: "Reviews",
+    },
+  ],
   category_id: {
     type: mongoose.ObjectId,
-    ref: "Category",
+    ref: "Categories",
   },
 });
 

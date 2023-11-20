@@ -1,11 +1,11 @@
-const { Role_Bases } = require("../models");
+const { Role_Bases } = require("../../models");
 
 module.exports = {
   role_create: async (req, res) => {
     try {
       const { role_name } = req.body;
 
-      Role_Bases.create({
+      const create_execute = await Role_Bases.create({
         role_name,
       });
 
@@ -19,7 +19,7 @@ module.exports = {
 
       res.status(201).json({
         message: "Create role has successfull",
-        any_message: `Create: ${role_name}`,
+        data: create_execute,
       });
     } catch (error) {
       console.log(`\nError : ${error}`);
@@ -34,13 +34,13 @@ module.exports = {
       const { role_id } = req.params;
       const new_role_name = req.body.role_name;
 
-      const get_role = await Role_Bases.findByIdAndUpdate(role_id, {
+      const update_execute = await Role_Bases.findByIdAndUpdate(role_id, {
         role_name: new_role_name,
       });
 
       res.status(201).json({
         message: "Update role has successfull",
-        any_message: `Update: ${get_role.role_name} to ${new_role_name}`,
+        data: update_execute
       });
     } catch (error) {
       console.log(`\nError : ${error}`);
@@ -55,11 +55,11 @@ module.exports = {
 
       const { role_id } = req.params;
 
-      const delete_role = await Role_Bases.findByIdAndDelete(role_id);
+      const delete_execute = await Role_Bases.findByIdAndDelete(role_id);
 
       res.status(201).json({
         message: "Delete role has successfull",
-        any_message: `Delete: ${delete_role.role_name}`,
+        data: delete_execute
       });
 
     } catch (error) {
@@ -72,11 +72,11 @@ module.exports = {
   },
   role_show_all: async (req, res) => {
     try {
-      const role = await Role_Bases.find({});
+      const get_execute = await Role_Bases.find({});
 
       res.status(200).json({
         message: "Get all role has successfull",
-        data: role,
+        data: get_execute,
       });
     } catch (error) {
       console.log(`\nError : ${error}`);

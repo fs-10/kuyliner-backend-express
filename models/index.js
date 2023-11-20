@@ -4,5 +4,6 @@ const Reviews = require("./Reviews.model");
 const Suppliers = require("./Suppliers.model");
 const Products = require("./Products.model");
 const Categories = require("./Categories.model");
+const Promotions = require("./Promotions.model");
 
-module.exports = { Role_Bases, Users, Reviews, Suppliers, Products, Categories };
+module.exports = { Role_Bases, Users, Reviews, Suppliers, Products, Categories, Promotions };

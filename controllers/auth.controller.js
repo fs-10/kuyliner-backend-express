@@ -28,7 +28,11 @@ module.exports = {
             }).populate("role_id");
 
             const user_token = jwt.sign(
-              { id: user._id, email: user.email, role: role_user.role_id.role_name},
+              {
+                id: user._id,
+                email: user.email,
+                role: role_user.role_id.role_name,
+              },
               process.env.KEY
             );
 
@@ -46,17 +50,18 @@ module.exports = {
               message: "Wrong password",
             });
           } else {
-            const supplier_token = jwt.sign(
-              { id: supplier._id, email: supplier.email },
-              process.env.KEY
-            );
-
             const [role_supplier] = await Suppliers.find({
               role_id: supplier.role_id,
             }).populate("role_id");
 
+            const supplier_token = jwt.sign(
+              { id: supplier._id, email: supplier.email, role: role_supplier.role_id.role_name },
+              process.env.KEY
+            );
+
             res.status(200).json({
-              message: `Hallo ${email}, yang rolenya ${role_supplier.role_id.role_name}`,
+              message: `Login as a Supplier, success`,
+              token: supplier_token,
             });
           }
         }
