@@ -4,7 +4,7 @@ const {
   update_review,
   delete_review,
   get_all_review,
-} = require("../../controllers/user_control/review.controller");
+} = require("../../controllers/user_controller/review.controller");
 
 const { token, has_role } = require("../../middleware");
 
