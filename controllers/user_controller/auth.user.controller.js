@@ -5,52 +5,6 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 module.exports = {
-  sign_in1: async (req, res) => {
-    try {
-      const { email, password } = req.body;
-
-      const user = await Users.findOne({ email: email });
-
-      if (!user) {
-        res.status(404).json({
-          message: "Email not found",
-        });
-      } else {
-        if (!bcrypt.compareSync(password, user.password)) {
-          res.status(401).json({
-            message: "Wrong password",
-          });
-        } else {
-          const [role_user] = await Users.find({
-            role_id: user.role_id,
-          }).populate("role_id");
-
-          const user_token = jwt.sign(
-            {
-              id: user._id,
-              email: user.email,
-              role: role_user.role_id.role_name,
-            },
-            process.env.KEY
-          );
-
-          const decode = jwt.decode(user_token);
-          console.log(decode);
-
-          res.status(200).json({
-            message: `Login success`,
-            token: user_token,
-          });
-        }
-      }
-    } catch (error) {
-      console.log(`\nError : ${error}`);
-      res.status(500).json({
-        message: "Server error",
-        error: error.message,
-      });
-    }
-  },
   sign_in: async (req, res) => {
     try {
       const { email, password } = req.body;
