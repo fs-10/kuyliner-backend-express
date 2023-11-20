@@ -1,4 +1,4 @@
-const { Products } = require("../../models");
+const { Products, Reviews } = require("../../models");
 const jwt = require("jsonwebtoken");
 
 module.exports = {
