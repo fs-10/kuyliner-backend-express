@@ -4,7 +4,7 @@ const {
   role_update,
   role_delete,
   role_show_all,
-} = require("../../controllers/admin_control/role.controller");
+} = require("../../controllers/admin_controller/role.controller");
 
 const router = express.Router();
 
