@@ -7,12 +7,13 @@ module.exports = {
       const { authorization } = req.headers;
       const token = authorization.split(" ")[1];
       const { id } = jwt.decode(token);
-      const { text_review, stars } = req.body;
+      const { text_review, stars, id_products } = req.body;
 
       const create_execute = await Reviews.create({
         text_review,
         stars,
         id_reviewers: id,
+        id_products
       });
 
       res.status(201).json({
@@ -32,11 +33,13 @@ module.exports = {
       const { review_id } = req.params;
       const { text_review, stars } = req.body;
 
+      
       const update_execute = await Reviews.findByIdAndUpdate(review_id, {
         text_review,
         stars,
         date_create: Date.now(),
       });
+      
 
       res.status(201).json({
         message: "Update review successfull",

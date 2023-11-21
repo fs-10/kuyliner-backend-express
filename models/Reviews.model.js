@@ -8,6 +8,10 @@ const reviews_schema = new mongoose.Schema({
     type: mongoose.ObjectId,
     ref: "User",
   },
+  id_products: {
+    type: mongoose.ObjectId,
+    ref: "Products"
+  }
 });
 
 const Reviews = mongoose.model("Reviews", reviews_schema);
