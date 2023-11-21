@@ -51,13 +51,11 @@ module.exports = {
     try {
       const { authorization } = req.headers;
       const token = authorization.split(" ")[1];
-      const { id } = jwt.decode(token);
+      const { email } = jwt.decode(token);
 
       console.log(jwt.decode(token));
 
-      const promotion = await Promotions.find({}).populate("product_id");
-
-      console.log(promotion.map(test => test));
+      const promotion = await Promotions.find({supplier_email: email});
 
       res.status(200).json({
         message: "Get all review successfull",
