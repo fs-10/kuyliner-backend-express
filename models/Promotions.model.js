@@ -7,10 +7,6 @@ const promotions_schema = new mongoose.Schema({
   product_id: {
     type: mongoose.ObjectId,
     ref: "Products",
-  },
-  supplier_id: {
-    type: mongoose.ObjectId,
-    ref: "Suppliers"
   }
 });
 
