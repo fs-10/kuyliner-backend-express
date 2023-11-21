@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const auth = require("./auth.route");
+const user_auth = require("./user_route/auth.user.route");
+const supplier_auth = require("./supplier_route/auth.supplier.route");
 const role_base = require("./admin_route/role.route");
 const category = require("./admin_route/category.route");
 const review = require("./user_route/review.route");
@@ -14,14 +15,14 @@ router.get("/", (req, res) => {
   });
 });
 
-router.use("/auth", auth);
-
 // User
 router.use("/review", review);
+router.use("/user", user_auth);
 
 // Supplier
 router.use("/product", product);
 router.use("/promotion", promotion);
+router.use("/supplier", supplier_auth);
 
 // Admin
 router.use("/superadmin", role_base);

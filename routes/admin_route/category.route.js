@@ -4,7 +4,7 @@ const {
   category_update,
   category_delete,
   category_show_all,
-} = require("../../controllers/admin_control/category.controller");
+} = require("../../controllers/admin_controller/category.controller");
 
 const router = express.Router();
 
