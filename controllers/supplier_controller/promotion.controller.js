@@ -4,11 +4,16 @@ const jwt = require("jsonwebtoken");
 module.exports = {
   create_promotion: async (req, res) => {
     try {
+      const { authorization } = req.headers;
+      const token = authorization.split(" ")[1];
+      const { id } = jwt.decode(token);
+
       const { product_id, due_date } = req.body;
       const one_day = 1000 * 60 * 60 * 24;
 
       const create_execute = await Promotions.create({
         product_id,
+        supplier_id: id,
         due_date: one_day * due_date,
       });
 
@@ -48,7 +53,7 @@ module.exports = {
       const token = authorization.split(" ")[1];
       const { id } = jwt.decode(token);
 
-      const promotion = await Promotions.find({}).populate("");
+      const promotion = await Promotions.find({ supplier_id: id });
 
       res.status(200).json({
         message: "Get all review successfull",
