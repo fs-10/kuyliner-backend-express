@@ -53,8 +53,6 @@ module.exports = {
       const token = authorization.split(" ")[1];
       const { email } = jwt.decode(token);
 
-      console.log(jwt.decode(token));
-
       const promotion = await Promotions.find({supplier_email: email});
 
       res.status(200).json({
