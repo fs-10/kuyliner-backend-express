@@ -33,9 +33,6 @@ module.exports = {
             process.env.KEY
           );
 
-          const decode = jwt.decode(user_token);
-          console.log(decode);
-
           res.status(200).json({
             message: `Login success`,
             token: user_token,
