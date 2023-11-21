@@ -53,7 +53,9 @@ module.exports = {
       const token = authorization.split(" ")[1];
       const { id } = jwt.decode(token);
 
-      const promotion = await Promotions.find({}).populate("product_id").find({supplier_id: id});
+      const promotion = await Promotions.find({})
+        .populate("product_id")
+        .find({ supplier_id: id });
 
       res.status(200).json({
         message: "Get all review successfull",
