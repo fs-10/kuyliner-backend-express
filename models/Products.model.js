@@ -8,12 +8,6 @@ const products_schema = new mongoose.Schema({
     type: mongoose.ObjectId,
     ref: "Suppliers",
   },
-  reviewer_id: [
-    {
-      type: mongoose.ObjectId,
-      ref: "Reviews",
-    },
-  ],
   category_id: {
     type: mongoose.ObjectId,
     ref: "Categories",
