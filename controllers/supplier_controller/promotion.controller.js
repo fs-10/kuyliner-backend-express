@@ -1,4 +1,4 @@
-const { Promotions, Products } = require("../../models");
+const { Promotions } = require("../../models");
 const jwt = require("jsonwebtoken");
 
 module.exports = {
@@ -6,14 +6,14 @@ module.exports = {
     try {
       const { authorization } = req.headers;
       const token = authorization.split(" ")[1];
-      const { id } = jwt.decode(token);
+      const { email } = jwt.decode(token);
 
       const { product_id, due_date } = req.body;
       const one_day = 1000 * 60 * 60 * 24;
 
       const create_execute = await Promotions.create({
         product_id,
-        supplier_id: id,
+        supplier_email: email,
         due_date: one_day * due_date,
       });
 
@@ -53,9 +53,11 @@ module.exports = {
       const token = authorization.split(" ")[1];
       const { id } = jwt.decode(token);
 
-      const promotion = await Promotions.find({})
-        .populate("product_id")
-        .find({ supplier_id: id });
+      console.log(jwt.decode(token));
+
+      const promotion = await Promotions.find({}).populate("product_id");
+
+      console.log(promotion.map(test => test));
 
       res.status(200).json({
         message: "Get all review successfull",
