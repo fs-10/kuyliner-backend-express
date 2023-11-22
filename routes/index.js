@@ -22,7 +22,7 @@ router.use("/user", user_auth);
 router.use("/products", product);
 
 // Supplier
-router.use("/product_supplier", product_supplier);
+router.use("/productSupplier", product_supplier);
 router.use("/promotion", promotion);
 router.use("/supplier", supplier_auth);
 
