@@ -8,10 +8,7 @@ const promotions_schema = new mongoose.Schema({
     type: mongoose.ObjectId,
     ref: "Products",
   },
-  supplier_id: {
-    type: mongoose.ObjectId,
-    ref: "Suppliers"
-  }
+  supplier_email: {type: String, required: true}
 });
 
 const Promotions = mongoose.model("Promotions", promotions_schema);

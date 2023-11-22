@@ -12,8 +12,9 @@ module.exports = {
       const create_execute = await Reviews.create({
         text_review,
         stars,
+        id_products,
         id_reviewers: id,
-        id_products
+        date_create: Date.now(),
       });
 
       res.status(201).json({

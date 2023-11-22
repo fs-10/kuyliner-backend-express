@@ -8,7 +8,7 @@ module.exports = {
       const token = authorization.split(" ")[1];
       const { id } = jwt.decode(token);
 
-      const { name_product, price } = req.body;
+      const { name_product, price, category_id } = req.body;
       let { product_image } = req.body;
 
       // Nanti perlu nambah gambar, ini DEMO dulu
@@ -18,6 +18,7 @@ module.exports = {
         name_product,
         price,
         product_image,
+        category_id,
         supplier_id: id,
       });
 
@@ -36,12 +37,13 @@ module.exports = {
   update_product: async (req, res) => {
     try {
       const { product_id } = req.params;
-      const { name_product, price, product_image } = req.body;
+      const { name_product, price, product_image, category_id } = req.body;
 
       const update_execute = await Products.findByIdAndUpdate(product_id, {
         name_product,
         price,
         product_image,
+        category_id
       });
 
       res.status(201).json({
