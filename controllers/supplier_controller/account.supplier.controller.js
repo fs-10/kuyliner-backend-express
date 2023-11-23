@@ -47,9 +47,16 @@ module.exports = {
     }
   },
   deleteAccountSupplier: async (req, res) => {
-    try{
+    try {
+      const { supplierId } = req.params;
+      const supplier = await Suppliers.findById(supplierId);
 
-    } catch(error){
+
+      res.status(201).json({
+        message: "Success to edit account supplier",
+        data: supplier,
+      });
+    } catch (error) {
       console.log(`Error: ${error}`);
       res.status(400).json({
         message: "Failed to edit account supplier",

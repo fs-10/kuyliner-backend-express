@@ -3,12 +3,14 @@ const {
   getAllProduct,
   getAllProductByLocation,
   searchProduct,
+  getProductById
 } = require("../../controllers/user_controller/product.user.controller");
 const router = express.Router();
 
 router.get("/", getAllProduct);
-router.get("/:search", searchProduct);
+router.get("/search/:search", searchProduct);
 
-router.get("/:search/:location", getAllProductByLocation);
+// router.get("/:search/:location", getAllProductByLocation);
+router.get("/:id", getProductById);
 
 module.exports = router;

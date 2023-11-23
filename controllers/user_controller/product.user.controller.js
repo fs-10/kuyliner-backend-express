@@ -62,4 +62,22 @@ module.exports = {
       });
     }
   },
+  getProductById: async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      const product = await Products.findById(id);
+
+      res.status(200).json({
+        message: "Success get data",
+        data: product,
+      });
+    } catch (error) {
+      console.log(`Error: ${error}`);
+      res.status(400).json({
+        message: "Failed to get data product",
+        error: error.message,
+      });
+    }
+  },
 };
