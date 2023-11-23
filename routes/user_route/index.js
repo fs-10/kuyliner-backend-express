@@ -3,4 +3,4 @@ const productUser = require("./product.user.route");
 const reviewUser = require("./review.route");
 const accountUser = require("./account.user.route");
 
-module.exports = { authUser, productUser, reviewUser };
+module.exports = { authUser, productUser, reviewUser, accountUser };

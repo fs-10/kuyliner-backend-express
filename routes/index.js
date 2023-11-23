@@ -24,6 +24,7 @@ router.get("/", (req, res) => {
 
 // User
 router.use("/review", reviewUser);
+router.use("/user", accountUser);
 router.use("/user", authUser);
 router.use("/products", productUser);
 
