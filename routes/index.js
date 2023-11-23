@@ -7,6 +7,7 @@ const {
   authSupplier,
   productSupplier,
   promotionSupplier,
+  accountSupplier
 } = require("./supplier_route");
 
 const {
@@ -32,6 +33,7 @@ router.use("/products", productUser);
 router.use("/productSupplier", productSupplier);
 router.use("/promotion", promotionSupplier);
 router.use("/supplier", authSupplier);
+router.use("/supplier", accountSupplier);
 
 // Admin
 router.use("/superadmin", categoryAdmin);
