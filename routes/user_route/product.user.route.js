@@ -7,7 +7,7 @@ const {
 } = require("../../controllers/user_controller/product.user.controller");
 const router = express.Router();
 
-router.get("/", getAllProduct);
+router.get("/search/", getAllProduct);
 router.get("/search/:search", searchProduct);
 
 // router.get("/:search/:location", getAllProductByLocation);
