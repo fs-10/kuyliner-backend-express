@@ -8,9 +8,9 @@ const {
 
 const router = express.Router();
 
-router.post("/superadmin/role_base/", role_create);
-router.put("/superadmin/role_base/:role_id", role_update);
-router.delete("/superadmin/role_base/:role_id", role_delete);
-router.get("/superadmin/role_base/", role_show_all);
+router.post("/role_base/", role_create);
+router.put("/role_base/:role_id", role_update);
+router.delete("/role_base/:role_id", role_delete);
+router.get("/role_base/", role_show_all);
 
 module.exports = router;
