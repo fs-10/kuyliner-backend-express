@@ -8,7 +8,7 @@ module.exports = {
   sign_in: async (req, res) => {
     try {
       const { email, password } = req.body;
-      const supplier = await Suppliers.findOne({ email: email });
+      const supplier = await Suppliers.find({ email: email });
 
       if (!supplier) {
         res.status(404).json({
