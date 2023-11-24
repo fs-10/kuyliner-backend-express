@@ -8,11 +8,7 @@ module.exports = {
       const token = authorization.split(" ")[1];
       const { id } = jwt.decode(token);
 
-      const { name_product, price, category_id } = req.body;
-      let { product_image } = req.body;
-
-      // Nanti perlu nambah gambar, ini DEMO dulu
-      product_image = product_image || "";
+      const { name_product, price, category_id, product_image } = req.body;
 
       const create_execute = await Products.create({
         name_product,
