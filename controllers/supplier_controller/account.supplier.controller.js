@@ -44,9 +44,9 @@ module.exports = {
       day_of_week = day_of_week || "";
 
       const supplier = await Suppliers.findByIdAndUpdate(supplierId, {
-        newFirstName,
+        first_name,
         last_name,
-        newAddress,
+        address,
         location_gmaps,
         profile_image,
         open_time,
