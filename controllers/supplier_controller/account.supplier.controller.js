@@ -23,6 +23,23 @@ module.exports = {
   editAccountSupplier: async (req, res) => {
     try {
       const { supplierId } = req.params;
+      const { first_name, address } = req.body;
+      let {
+        last_name,
+        location_gmaps,
+        profile_image,
+        open_time,
+        closed_time,
+        day_of_week,
+      } = req.body;
+
+      last_name = last_name || "";
+      location_gmaps = location_gmaps || "";
+      profile_image = profile_image || "";
+      open_time = open_time || "";
+      closed_time = closed_time || "";
+      day_of_week = day_of_week || "";
+
       const supplier = await Suppliers.findByIdAndUpdate(supplierId, {
         first_name,
         last_name,
@@ -50,7 +67,6 @@ module.exports = {
     try {
       const { supplierId } = req.params;
       const supplier = await Suppliers.findById(supplierId);
-
 
       res.status(201).json({
         message: "Success to edit account supplier",
