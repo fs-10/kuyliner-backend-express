@@ -61,7 +61,7 @@ module.exports = {
         day_of_week,
       } = req.body;
 
-      const find_supplier = await Suppliers.findOne({ email: email });
+      const find_supplier = await Suppliers.find({ email: email });
 
       if (find_supplier != null) {
         if (find_supplier.email === email) {
