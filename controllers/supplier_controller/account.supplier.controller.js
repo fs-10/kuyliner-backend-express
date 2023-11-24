@@ -34,14 +34,13 @@ module.exports = {
         day_of_week,
       } = req.body;
 
-      first_name = first_name || "";
-      address = address || "";
-      last_name = last_name || "";
-      location_gmaps = location_gmaps || "";
-      profile_image = profile_image || "";
-      open_time = open_time || "";
-      closed_time = closed_time || "";
-      day_of_week = day_of_week || "";
+      const openTime = new Date();
+      openTime.setHours(Number(open_time.split(":")[0]));
+      openTime.setMinutes(Number(open_time.split(":")[1]));
+
+      const closedTime = new Date();
+      closedTime.setHours(Number(closed_time.split(":")[0]));
+      closedTime.setMinutes(Number(closed_time.split(":")[1]));
 
       const supplier = await Suppliers.findByIdAndUpdate(supplierId, {
         first_name,
@@ -49,8 +48,8 @@ module.exports = {
         address,
         location_gmaps,
         profile_image,
-        open_time,
-        closed_time,
+        open_time: openTime,
+        closed_time: closedTime,
         day_of_week,
       });
 
