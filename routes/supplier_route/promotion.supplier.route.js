@@ -9,8 +9,8 @@ const { token, has_role } = require("../../middleware");
 
 const router = express.Router();
 
-router.get("/", token, get_all_promotion);
-router.post("/", token, create_promotion);
-router.delete("/:promotion_id", token, delete_promotion);
+router.get("/", token, has_role("supplier"), get_all_promotion);
+router.post("/", token, has_role("supplier"), create_promotion);
+router.delete("/:promotion_id", has_role("supplier"), token, delete_promotion);
 
 module.exports = router;

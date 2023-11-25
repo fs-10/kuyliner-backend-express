@@ -9,10 +9,7 @@ module.exports = {
     try {
       const { email, password } = req.body;
 
-      const user = await Users.findOne({ email: email });
-      const [role_user] = await Users.find({
-        role_id: user.role_id,
-      }).populate("role_id");
+      const user = await Users.findOne({ email: email }).populate("role_id");
 
       if (!user) {
         res.status(404).json({
@@ -26,9 +23,9 @@ module.exports = {
         } else {
           const user_token = jwt.sign(
             {
-              id: user._id,
+              id: user.id,
               email: user.email,
-              role: role_user.role_id.role_name,
+              role: user.role_id.role_name,
             },
             process.env.KEY
           );

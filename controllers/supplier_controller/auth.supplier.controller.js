@@ -8,7 +8,7 @@ module.exports = {
   sign_in: async (req, res) => {
     try {
       const { email, password } = req.body;
-      const supplier = await Suppliers.find({ email: email });
+      const supplier = await Suppliers.findOne({ email: email }).populate("role_id");
 
       if (!supplier) {
         res.status(404).json({
@@ -20,15 +20,12 @@ module.exports = {
             message: "Wrong password",
           });
         } else {
-          const [role_supplier] = await Suppliers.find({
-            role_id: supplier.role_id,
-          }).populate("role_id");
 
           const supplier_token = jwt.sign(
             {
               id: supplier._id,
               email: supplier.email,
-              role: role_supplier.role_id.role_name,
+              role: supplier.role_id.role_name,
             },
             process.env.KEY
           );
@@ -41,7 +38,7 @@ module.exports = {
       }
     } catch (error) {
       console.log(`\nError : ${error}`);
-      res.status(500).json({
+      res.status(400).json({
         message: "Server error",
         error: error.message,
       });

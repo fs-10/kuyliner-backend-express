@@ -10,9 +10,9 @@ const { token, has_role } = require("../../middleware");
 
 const router = express.Router();
 
-router.get("/", token, get_all_review);
-router.post("/", token, create_review);
-router.put("/:review_id", token, update_review);
-router.delete("/:review_id", token, delete_review);
+router.get("/", token, has_role("user"), get_all_review);
+router.post("/", has_role("user"), token, create_review);
+router.put("/:review_id", has_role("user"), token, update_review);
+router.delete("/:review_id", has_role("user"), token, delete_review);
 
 module.exports = router;

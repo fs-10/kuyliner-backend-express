@@ -1,5 +1,5 @@
 const { Users } = require("../../models");
-const jwt = require("jsonwebtoken");
+const cloudinary = require("../../config/cloudinary_connection");
 
 module.exports = {
   // getAllAccount: async (req, res) => {},
@@ -26,11 +26,16 @@ module.exports = {
       const { userId } = req.params;
       const { first_name, last_name, location, profile_image } = req.body;
 
+      const image = await cloudinary.uploader.upload(
+        profile_image,
+        (error, result) => console.log(error)
+      );
+
       const user = await Users.findByIdAndUpdate(userId, {
         first_name,
         last_name,
         location,
-        profile_image,
+        profile_image: image.secure_url,
       });
 
       res.status(201).json({

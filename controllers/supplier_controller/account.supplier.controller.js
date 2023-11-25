@@ -1,4 +1,5 @@
 const { Suppliers } = require("../../models");
+const cloudinary = require("../../config/cloudinary_connection");
 
 module.exports = {
   // getAllAccountSupplier: async (req, res) => {},
@@ -42,12 +43,17 @@ module.exports = {
       closedTime.setHours(Number(closed_time.split(":")[0]));
       closedTime.setMinutes(Number(closed_time.split(":")[1]));
 
+      const image = await cloudinary.uploader.upload(
+        profile_image,
+        (error, result) => console.log(error)
+      );
+
       const supplier = await Suppliers.findByIdAndUpdate(supplierId, {
         first_name,
         last_name,
         address,
         location_gmaps,
-        profile_image,
+        profile_image: image.secure_url,
         open_time: openTime,
         closed_time: closedTime,
         day_of_week,

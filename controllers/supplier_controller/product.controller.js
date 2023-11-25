@@ -1,5 +1,6 @@
 const { Products } = require("../../models");
 const jwt = require("jsonwebtoken");
+const cloudinary = require("../../config/cloudinary_connection");
 
 module.exports = {
   create_product: async (req, res) => {
@@ -10,10 +11,15 @@ module.exports = {
 
       const { name_product, price, category_id, product_image } = req.body;
 
+      const image = await cloudinary.uploader.upload(
+        product_image,
+        (error, result) => console.log(error)
+      );
+
       const create_execute = await Products.create({
         name_product,
         price,
-        product_image,
+        product_image: image.secure_url,
         category_id,
         supplier_id: id,
       });
@@ -35,11 +41,16 @@ module.exports = {
       const { product_id } = req.params;
       const { name_product, price, product_image, category_id } = req.body;
 
+      const image = await cloudinary.uploader.upload(
+        product_image,
+        (error, result) => console.log(error)
+      );
+
       const update_execute = await Products.findByIdAndUpdate(product_id, {
         name_product,
         price,
-        product_image,
-        category_id
+        product_image: image.secure_url,
+        category_id,
       });
 
       res.status(201).json({
