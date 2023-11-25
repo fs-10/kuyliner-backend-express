@@ -7,11 +7,11 @@ const {
 } = require("../../controllers/user_controller/account.user.controller");
 const router = express.Router();
 
-const { token } = require("../../middleware");
+const { token, has_role } = require("../../middleware");
 
 // router.get("/", getAllAccount);
-router.get("/:userId", getAccountById);
-router.put("/:userId", token, editAccount);
-router.delete("/:userId", token, deleteAccount);
+// router.get("/:userId", getAccountById);
+router.put("/:userId", token, has_role("user"), editAccount);
+// router.delete("/:userId", token, has_role("user"), deleteAccount);
 
 module.exports = router;
