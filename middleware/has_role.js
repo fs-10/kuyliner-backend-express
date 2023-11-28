@@ -12,10 +12,9 @@ function has_role(roles) {
         res.status(401).json({
           message: "Can't access this features",
         });
-      } else{
+      } else {
         next();
       }
-
     } catch (error) {
       console.log(`Error: ${error}`);
       res.status(400).json({

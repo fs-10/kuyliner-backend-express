@@ -24,7 +24,9 @@ module.exports = {
   },
   getAllProduct: async (req, res) => {
     try {
-      const product = await Products.find({});
+      const product = await Products.find({})
+        .populate("supplier_id")
+        .populate("category_id");
 
       res.status(200).json({
         message: "Success get all data product",
@@ -66,7 +68,9 @@ module.exports = {
     try {
       const { id } = req.params;
 
-      const product = await Products.findById(id).populate("supplier_id").populate("category_id");
+      const product = await Products.findById(id)
+        .populate("supplier_id")
+        .populate("category_id");
 
       res.status(200).json({
         message: "Success get data",
