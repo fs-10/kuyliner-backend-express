@@ -92,8 +92,9 @@ module.exports = {
   },
   get_all_review_common: async (req, res) => {
     try {
-
-      const review = await Reviews.find();
+      const review = await Reviews.find({})
+        .populate("id_products")
+        .populate("id_reviewers");
 
       res.status(200).json({
         message: "Get all review successfull",

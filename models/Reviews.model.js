@@ -6,7 +6,7 @@ const reviews_schema = new mongoose.Schema({
   date_create: { type: Date, required: true, default: Date.now },
   id_reviewers: {
     type: mongoose.ObjectId,
-    ref: "User",
+    ref: "Users",
   },
   id_products: {
     type: mongoose.ObjectId,
