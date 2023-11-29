@@ -34,13 +34,11 @@ module.exports = {
       const { review_id } = req.params;
       const { text_review, stars } = req.body;
 
-      
       const update_execute = await Reviews.findByIdAndUpdate(review_id, {
         text_review,
         stars,
         date_create: Date.now(),
       });
-      
 
       res.status(201).json({
         message: "Update review successfull",
@@ -79,6 +77,23 @@ module.exports = {
       const { id } = jwt.decode(token);
 
       const review = await Reviews.find({ id_reviewers: id });
+
+      res.status(200).json({
+        message: "Get all review successfull",
+        data: review,
+      });
+    } catch (error) {
+      console.log(`\nError : ${error}`);
+      res.status(404).json({
+        message: "Failed to get review data",
+        error: error.message,
+      });
+    }
+  },
+  get_all_review_common: async (req, res) => {
+    try {
+
+      const review = await Reviews.find();
 
       res.status(200).json({
         message: "Get all review successfull",
