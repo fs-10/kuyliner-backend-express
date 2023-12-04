@@ -10,7 +10,7 @@ const router = express.Router();
 const { token, has_role } = require("../../middleware");
 
 // router.get("/", getAllAccount);
-// router.get("/:userId", getAccountById);
+router.get("/:userId", token, has_role("user"), getAccountById);
 router.put("/:userId", token, has_role("user"), editAccount);
 // router.delete("/:userId", token, has_role("user"), deleteAccount);
 
