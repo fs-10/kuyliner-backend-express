@@ -33,6 +33,7 @@ module.exports = {
           res.status(200).json({
             message: `Login success`,
             token: user_token,
+            userId: user.id,
           });
         }
       }

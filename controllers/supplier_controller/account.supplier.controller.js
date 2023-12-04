@@ -25,6 +25,7 @@ module.exports = {
     try {
       const { supplierId } = req.params;
       let {
+        supplier_username,
         first_name,
         address,
         last_name,
@@ -49,6 +50,7 @@ module.exports = {
       );
 
       const supplier = await Suppliers.findByIdAndUpdate(supplierId, {
+        supplier_username,
         first_name,
         last_name,
         address,
@@ -88,4 +90,21 @@ module.exports = {
       });
     }
   },
+
+  getAllSupplier: async (req, res) => {
+    try {
+      const supplier = await Suppliers.find({});
+
+      res.status(200).json({
+        message: "Success to edit account supplier",
+        data: supplier,
+      });
+    } catch (error) {
+      console.log(`Error: ${error}`);
+      res.status(400).json({
+        message: "Failed to get all supplier",
+        error: error.message,
+      });
+    }
+  }
 };

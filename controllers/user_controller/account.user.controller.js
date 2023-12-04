@@ -26,16 +26,16 @@ module.exports = {
       const { userId } = req.params;
       const { first_name, last_name, location, profile_image } = req.body;
 
-      const image = await cloudinary.uploader.upload(
-        profile_image,
-        (error, result) => console.log(error)
-      );
+      // const image = await cloudinary.uploader.upload(
+      //   profile_image,
+      //   (error, result) => console.log(`Error ${error}`)
+      // );
 
       const user = await Users.findByIdAndUpdate(userId, {
         first_name,
         last_name,
         location,
-        profile_image: image.secure_url,
+        profile_image,
       });
 
       res.status(201).json({

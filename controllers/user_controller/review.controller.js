@@ -76,7 +76,7 @@ module.exports = {
       const token = authorization.split(" ")[1];
       const { id } = jwt.decode(token);
 
-      const review = await Reviews.find({ id_reviewers: id });
+      const review = await Reviews.find({ id_reviewers: id }).populate("id_products").populate("id_reviewers");
 
       res.status(200).json({
         message: "Get all review successfull",
@@ -99,6 +99,28 @@ module.exports = {
       res.status(200).json({
         message: "Get all review successfull",
         data: review,
+      });
+    } catch (error) {
+      console.log(`\nError : ${error}`);
+      res.status(404).json({
+        message: "Failed to get review data",
+        error: error.message,
+      });
+    }
+  },
+  get_all_review_common_by_product: async (req, res) => {
+    try {
+      const { product } = req.params;
+
+      const review = await Reviews.find({})
+        .populate("id_products")
+        .populate("id_reviewers");
+      
+      const getByProduct = review.filter((item)=> (item.id_products._id == product));
+
+      res.status(200).json({
+        message: "Get all review successfull",
+        data: getByProduct,
       });
     } catch (error) {
       console.log(`\nError : ${error}`);
